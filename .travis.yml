@@ -1,15 +1,13 @@
 language: generic 
 sudo: required
-env:
-  - DOCKERTAG="romarioop/docker"
 services:
   - docker
 
 before_install: 
-  - docker build -t $DOCKERTAG -react -f Dockerfile.dev .
+  - docker build -t romarioop/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run -e CI=true $DOCKERTAG -react npm run test
+  - docker run -e CI=true romarioop/docker-react npm run test
 
 deploy:
   provider: elasticbeanstalk
@@ -20,5 +18,5 @@ deploy:
   bucket_path: "Docker-react"
   on:
     branch: master
-  access_key_id: "$AWS_ACCESS_KEY"
-  secret_access_key: "$AWS_SECRET_KEY"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
