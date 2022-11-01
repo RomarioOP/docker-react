@@ -6,10 +6,10 @@ services:
   - docker
 
 before_install: 
-  - docker build -t DOCKERTAG -react -f Dockerfile.dev .
+  - docker build -t $DOCKERTAG -react -f Dockerfile.dev .
 
 script:
-  - docker run -e CI=true DOCKERTAG -react npm run test
+  - docker run -e CI=true $DOCKERTAG -react npm run test
 
 deploy:
   provider: elasticbeanstalk
